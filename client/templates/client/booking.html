@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col-md-12 col-12">
+				<nav aria-label="breadcrumb" class="page-breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Booking</li>
+					</ol>
+				</nav>
+				<h2 class="breadcrumb-title">Booking</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-12">
+
+				<div class="card">
+					<div class="card-body">
+						<div class="booking-doc-info">
+							<a href="doctor-profile.html" class="booking-doc-img">
+
+								{% if doctor.image %}
+								<img src="{{doctor.image.url}}" alt="User Image">
+								{% else %}
+								<img alt="User Image" src="{% static 'assets/img/doctors/Default-Profile_doctor.jpg' %}">
+								{% endif %}
+
+
+							</a>
+							<div class="booking-info">
+								<h4><a href="doctor-profile.html">Dr. {{doctor.user.first_name}} {{doctor.user.last_name}}</a></h4>
+								<div class="rating">
+									<i class="fas fa-star filled"></i>
+									<i class="fas fa-star filled"></i>
+									<i class="fas fa-star filled"></i>
+									<i class="fas fa-star filled"></i>
+									<i class="fas fa-star"></i>
+									<span class="d-inline-block average-rating">35</span>
+								</div>
+								<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+									{{doctor.address}} : {{doctor.address_detail}}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Schedule Widget -->
+				<div class="card booking-schedule schedule-widget">
+
+					<!-- Schedule Header -->
+					<div class="schedule-header">
+						<div class="row">
+							<div class="col-md-12">
+
+								<!-- Day Slot -->
+								<div class="day-slot">
+									<ul>
+										<li class="left-arrow">
+											<a href="#">
+												<i class="fa fa-chevron-left"></i>
+											</a>
+										</li>
+										{% comment %} {% for doc_schedules in doc_schedule %}
+										<li>
+											<span>{{doc_schedules.date|date:'D'}}</span>
+											<span class="slot-date">{{doc_schedules.date|date:'j M'}}<small
+													class="slot-year"> {{doc_schedules.date|date:'Y'}}</small></span>
+										</li>
+										{% endfor %} {% endcomment %}
+
+										{% for doc_schedules in dates %}
+										<li>
+											<span>{{doc_schedules|date:'D'}}</span>
+											<span class="slot-date">{{doc_schedules|date:'j M'}}<small
+													class="slot-year"> {{doc_schedules|date:'Y'}}</small></span>
+										</li>
+										{% endfor %}
+										<li class="right-arrow">
+											<a href="#">
+												<i class="fa fa-chevron-right"></i>
+											</a>
+										</li>
+
+									</ul>
+								</div>
+								<!-- /Day Slot -->
+
+							</div>
+						</div>
+					</div>
+					<!-- /Schedule Header -->
+
+					<!-- Schedule Content -->
+					<div class="schedule-cont">
+						<div class="row">
+							<div class="col-md-12">
+
+								<!-- Time Slot -->
+								<div class="time-slot">
+								{% for doc_schedules in doc_schedule %}
+									{% if not doc_schedules.confirmed %}
+									<ul class="clearfix">
+										<li>
+											<a class="timing btn btn-sm bg-success-light" href="{% url 'client:book_slot' doc_schedules.id %}  ">
+												<span>{{doc_schedules.start_time}}</span>
+											</a>
+										</li>
+									</ul>
+										{% else %}
+										<ul class="clearfix">
+											<li>
+												<a class="timing " >
+													<span>{{doc_schedules.start_time}}</span>
+												</a>
+											</li>
+										</ul>
+									{% endif %}
+								{% endfor %}
+								</div>
+								<!-- /Time Slot -->
+
+							</div>
+						</div>
+					</div>
+					<!-- /Schedule Content -->
+
+				</div>
+				<!-- /Schedule Widget -->
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /Page Content -->
+
+
+
+{% endblock body %}

@@ -1,0 +1,58 @@
+{% load static %}
+
+<!-- Profile Sidebar -->
+<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+	<div class="profile-sidebar">
+		<div class="widget-profile pro-widget-content">
+			<div class="profile-info-widget">
+				<a href="#" class="booking-doc-img">
+					{% if user.client_profile.image %}
+					<img src="{{user.client_profile.image.url}}" alt="User Image">
+					{% else %}
+					<img src="{% static 'assets/img/patients/Default-Profile-client.jpg' %}" alt="User Image">
+					{% endif %}
+				</a>
+				<div class="profile-det-info">
+					<h3>{{user.first_name}} {{user.last_name}}</h3>
+					<div class="patient-details">
+						<h5><i class="fas fa-birthday-cake"></i> {{user.client_profile.date_of_birth|date:'j M Y'}}</h5>
+						<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i>{{user.client_profile.address}} : {{user.client_profile.address_detail}}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dashboard-widget">
+			<nav class="dashboard-menu">
+				<ul>
+					<li>
+						<a href="{% url 'client:my-appointments' %}">
+							<i class="fas fa-columns"></i>
+							<span>لوحه التحكم</span>
+						</a>
+					</li>
+
+					<li >{% comment %} lass="active" {% endcomment %}
+						<a href="{% url 'client:update_client_profile' user.client_profile.slug %}">
+							<i class="fas fa-user-cog"></i>
+							<span>اعدادات الملف الشخصي</span>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'password_change' %}">
+							<i class="fas fa-lock"></i>
+							<span>تغيير كلمه المرور</span>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'doctor:logout' %}">
+							<i class="fas fa-sign-out-alt"></i>
+							<span>تسجيل الخروج</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+<!-- /Profile Sidebar -->

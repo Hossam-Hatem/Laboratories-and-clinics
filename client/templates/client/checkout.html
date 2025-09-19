@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+	
+		<!-- Breadcrumb -->
+		<div class="breadcrumb-bar">
+			<div class="container-fluid">
+				<div class="row align-items-center">
+					<div class="col-md-12 col-12">
+						<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadcrumb -->
+
+		<!-- Page Content -->
+		<div class="content">
+			<div class="container">
+
+				<div class="row" style="flex-direction: row-reverse;">
+					<div class="col-md-7 col-lg-8">
+						<div class="card">
+							<div class="card-body">
+
+								<!-- Checkout Form -->
+								<form action="https://dreamguys.co.in/demo/doccure/booking-success.html">
+
+
+
+									<div class="payment-widget">
+										<h4 class="card-title" style="text-align: center;">خطوات الدفع</h4>
+
+										<!-- Credit Card Payment -->
+										<div class="payment-list">
+											<label class="payment-radio credit-card-option" style="text-align: end;">
+												<input type="radio" name="radio" checked>
+												<span class="checkmark" style="display: none;"></span>
+												بطاقة الدفع
+											</label>
+											<div class="row" style="flex-direction: row-reverse;">
+												<div class="col-md-6">
+													<div class="form-group card-label" style="text-align: end;">
+														<label for="card_name" style="text-align: end;">اسم
+															البطاقة</label>
+														<input class="form-control" id="card_name" type="text">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group card-label">
+														<label for="card_number">رقم البطاقة</label>
+														<input class="form-control" id="card_number"
+															placeholder="1234  5678  9876  5432" type="text">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group card-label">
+														<label for="expiry_month">Expiry Month</label>
+														<input class="form-control" id="expiry_month" placeholder="MM"
+															type="text">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group card-label">
+														<label for="expiry_year">Expiry Year</label>
+														<input class="form-control" id="expiry_year" placeholder="YY"
+															type="text">
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group card-label">
+														<label for="cvv">CVV</label>
+														<input class="form-control" id="cvv" type="text">
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Credit Card Payment -->
+
+										<!-- Submit Section -->
+										<div class="submit-section mt-4">											
+											<a href="{% url 'client:booking_success' last_slog.doc.slug %}" class="btn btn-primary submit-btn">الدفع و التاكيد</a>
+										</div>
+								
+										<!-- /Submit Section -->
+
+									</div>
+								</form>
+								<!-- /Checkout Form -->
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-5 col-lg-4 theiaStickySidebar">
+
+						<!-- Booking Summary -->
+						<div class="card booking-card">
+
+							<div class="card-body">
+
+								<!-- Booking Doctor Info -->
+								<div class="booking-doc-info">
+									<a href="doctor-profile.html" class="booking-doc-img">
+										{% if slot.doc.image %}
+										<img src="{{slot.doc.image.url}}" alt="User Image">
+										{% else %}
+										<img class="img-fluid" alt="User Image"
+											src="{% static 'assets/img/doctors/Default-Profile_doctor.jpg' %}">
+										{% endif %}
+									</a>
+									<div class="booking-info">
+										<h4><a href="doctor-profile.html">Dr. {{slot.doc.user.first_name}} {{slot.doc.user.last_name}}</a></h4>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">35</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{slot.doc.address}} : 
+												{{slot.doc.address_detail}}</p>
+										</div>
+									</div>
+								</div>
+								<!-- Booking Doctor Info -->
+
+								<div class="booking-summary">
+									<div class="booking-item-wrap">
+										<ul class="booking-date">
+											<li>التاريخ <span>{{slot.date}}</span></li>
+											<li>الوقت <span>{{slot.start_time}}</span></li>
+										</ul>
+										<ul class="booking-fee">
+											<li>السعر <span>{{slot.doc.price}} ج</span></li>
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Booking Summary -->
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- /Page Content -->
+		{% endblock body %}
